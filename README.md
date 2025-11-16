@@ -1,3 +1,35 @@
+# gus
+
+gus wraps your monorepo's mise tasks so that you don't have to `cd` into each package to run them.
+
+## Usage
+
+Instead of running mise tasks like this:
+
+```bash
+cd packages/package-a
+mise run build
+```
+
+You can run them like this:
+
+```bash
+gus build package-a
+```
+
+You can even specify which .env file to run the task with:
+
+```bash
+gus deploy package-b --env prod
+```
+
+After running `gus discover` in your monorpo, gus will know about all your packages and their mise tasks.
+
+Run `gus list` to see all available packages and their tasks.
+
+If you want to manually control what tasks and packages are available, you can create/edit the `.gus.yaml` file in the monorepo root.
+
+````yaml
 # .gus.yaml.example
 # Gus configuration for your monorepo
 # Copy this to .gus.yaml and customize for your setup
@@ -16,7 +48,7 @@ services:
       - deploy
       - lint
       - docker-build
-  
+
   # Example library
   my-lib:
     path: libs/my-lib
@@ -27,7 +59,7 @@ services:
       - lint
       - build
       - publish
-  
+
   # Example infrastructure
   terraform:
     path: infrastructure/terraform
@@ -53,3 +85,9 @@ aliases:
     - my-api
   all-libs:
     - my-lib
+```
+````
+
+```
+
+```
